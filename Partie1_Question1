@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+void decompose(char phrase[], int *nbLettres, int *nbChiffres, int *nbAutres) // Procédure décompose
+{
+    int i=0;
+    *nbLettres=0; 
+    *nbChiffres=0; 
+    *nbAutres=0;
+
+    while (phrase[i] != '\0') // Fonction TQ
+    {
+        if ((phrase[i]>='a'&&phrase[i]<='z')||(phrase[i]>='A'&&phrase[i]<='Z')) // Si lettre
+        {
+            *nbLettres=*nbLettres+1;
+        } 
+        else if (phrase[i]>='0'&&phrase[i]<='9') //Si chiffre
+        {
+            *nbChiffres=*nbChiffres+1;
+        } 
+        else // Si autre
+        {
+            *nbAutres=*nbAutres+1;
+        }
+        i=i+1;
+    }
+}
+
+
+int main() // Programme principale
+{
+    char phrase[100];
+    int nbLettres, nbChiffres, nbAutres;
+
+    printf("Entrez une phrase (max 100 caractères) : ");
+    scanf("%s", phrase);
+    decompose(phrase, &nbLettres, &nbChiffres, &nbAutres);
+    printf("Nombre de lettres : %d\n", nbLettres);
+    printf("Nombre de chiffres : %d\n", nbChiffres);
+    printf("Nombre d'autres caractères : %d\n", nbAutres);
+
+    return 0;
+}
