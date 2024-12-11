@@ -1,0 +1,33 @@
+include <stdio.h>
+
+void entreTab1(int nbr, float tab1[]) 
+{
+    for (int i = 0; i < nbr; i=i+1) 
+    {
+        printf("Entrer la valeur %d : ", i + 1);
+        scanf("%f", &tab1[i]); 
+    }
+}
+
+
+void somme(float tab1[], int nbr) 
+{
+    float total = 0; 
+    for (int i = 0; i < nbr; i=i+1) 
+    {
+        total += tab1[i]; 
+    }
+    printf("La somme est : %f", total); 
+}
+
+int main() 
+{
+    int nbr; 
+    float tab1[100]; 
+    printf("Entrez le nombre de valeurs à saisir : ");
+    scanf("%d", &nbr);
+    entreTab1(nbr, tab1);
+    somme(tab1, nbr);
+
+    return 0;
+}
