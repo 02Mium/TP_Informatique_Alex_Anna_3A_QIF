@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <string.h>
+
+int est_nombre(const char *chaine) 
+{
+    int i = 0;
+    int pov = 0; // pov = point ou virgule
+    if (strlen(chaine) == 0) 
+    {
+        return 0;
+    }
+    else
+    {
+        if (chaine[0] == '+' || chaine[0] == '-') 
+        {
+            i=i+1;
+        }
+        for (; chaine[i] != '\0'; i=i+1) 
+        {
+            if (chaine[i] >= '0' && chaine[i] <= '9') 
+            {
+                continue;
+            } 
+else if (chaine[i] == '.' || chaine[i] == ',') 
+            {
+                if (pov == 0) 
+                {
+                    pov=pov+1;
+                } else 
+                {
+                    return 0;
+                }
+            } else 
+            {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+void entreTab1(int nbr, float tab1[]) 
+{
+    char tab[100];
+    for (int i = 0; i < nbr;) 
+    {
+        printf("Entrer la valeur %d : ", i+1);
+        scanf("%s", tab);
+        if (est_nombre(tab))
+        {
+            for (int i = 0; tab[i] != '\0'; i=i+1) 
+            {
+                if (tab[i] == ',') 
+                {
+                tab[i] = '.';
+                
+                }
+            }
+        
+            sscanf(tab,"%f", &tab1[i]);
+            i=i+1;
+        }
+        else
+        {
+            printf("Saisie invalide. \n");
+        }
+    }
+}
+void somme(float tab1[], int nbr) 
+{
+    float total = 0; 
+    for (int i = 0; i < nbr; i=i+1) 
+    {
+        total += tab1[i]; 
+    }
+    printf("La somme est : %f", total); 
+}
+int main() 
+{
+    int nbr; 
+    float tab1[100]; 
+    printf("Entrez le nombre de valeurs à saisir : ");
+    scanf("%d", &nbr);
+    entreTab1(nbr, tab1);
+    somme(tab1, nbr);
+
+    return 0;
+}
