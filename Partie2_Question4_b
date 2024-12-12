@@ -1,0 +1,113 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+int est_nombre(const char *chaine) 
+{
+    int i = 0;
+    int pov = 0; // pov = point ou virgule
+    if (strlen(chaine) == 0) 
+    {
+        return 0;
+    }
+    if (chaine[0] == '+' || chaine[0] == '-') 
+    {
+        i=i+1;
+    }
+    for (; chaine[i] != '\0'; i=i+1) 
+    {
+        if (chaine[i] >= '0' && chaine[i] <= '9') 
+        {
+            continue;
+        } 
+        else if (chaine[i] == '.' || chaine[i] == ',') 
+        {
+            if (pov == 0) 
+            {
+                pov=pov+1;
+            } 
+            else 
+            {
+                return 0;
+            }
+        } 
+        else 
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+float somme(float tab[], int nbr) 
+{
+    float total = 0;
+    for (int i = 0; i < nbr; i=i+1) 
+    {
+        total += tab[i];
+    }
+    return total;
+}
+
+float moyenne(float tab[], int nbr) 
+{
+    return somme(tab, nbr) / nbr;
+}
+
+float ecart_type(float tab[], int nbr) 
+{
+    float moy = moyenne(tab, nbr);
+    float variance = 0;
+    for (int i = 0; i < nbr; i=i+1) 
+    {
+        variance += (tab[i] - moy) * (tab[i] - moy);
+    }
+    variance /= nbr;
+    return sqrt(variance);
+}
+
+void entreTab1(int nbr, float tab1[]) 
+{
+    char tab[100];
+    for (int i = 0; i < nbr;) 
+    {
+        printf("Entrer la valeur %d : ", i + 1);
+        scanf("%s", tab);
+
+        if (est_nombre(tab)) 
+        {
+            for (int j = 0; tab[j] != '\0'; j=j+1) 
+            {
+                if (tab[j] == ',') 
+                {
+                    tab[j] = '.';
+                }
+            }
+
+            sscanf(tab, "%f", &tab1[i]);
+            i=i+1;
+
+            printf("Somme : %f\n", somme(tab1, i));
+            printf("Moyenne : %f\n", moyenne(tab1, i));
+            printf("Écart type : %f\n", ecart_type(tab1, i));
+        } 
+        else 
+        {
+            printf("Saisie invalide. Réessayez.\n");
+        }
+    }
+}
+
+// Programme principal
+int main() 
+{
+    int nbr;
+    float tab1[100];
+
+    printf("Entrez le nombre de valeurs à saisir : ");
+    scanf("%d", &nbr);
+
+    entreTab1(nbr, tab1);
+
+    return 0;
+}
