@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+int est_nombre(const char *chaine) 
+{
+    int i = 0;
+    int pov = 0; // pov = point ou virgule
+    if (strlen(chaine) == 0) 
+    {
+        return 0;
+    }
+    else
+    {
+        if (chaine[0] == '+' || chaine[0] == '-') 
+        {
+            i=i+1;
+        }
+        for (; chaine[i] != '\0'; i=i+1) 
+        {
+            if (chaine[i] >= '0' && chaine[i] <= '9') 
+            {
+                continue;
+            } 
+            else if (chaine[i] == '.' || chaine[i] == ',') 
+            {
+                if (pov == 0) 
+                {
+                    pov=pov+1;
+                } else 
+                {
+                    return 0;
+                }
+            } else 
+            {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+void saisir_continue(float tab[], int *nbr) 
+{
+    char saisie[100];
+    *nbr = 0;
+    while (1) 
+    {
+        printf("Entrez une valeur ou tapez 'stop' pour terminer : ");
+        scanf("%s", saisie);
+
+        if (strcmp(saisie, "stop") == 0) 
+        {
+            break;
+        }
+
+        if (est_nombre(saisie)) 
+        {
+            for (int i = 0; saisie[i] != '\0'; i=i+1) 
+            {
+                if (saisie[i] == ',') 
+                {
+                    saisie[i] = '.';
+                }
+            }
+            sscanf(saisie, "%f", &tab[*nbr]);
+            (*nbr)=(*nbr)+1;
+        } 
+        else 
+        {
+            printf("Saisie invalide. Veuillez réessayer.\n");
+        }
+    }
+}
+
+float somme(float tab[], int nbr) 
+{
+    float total = 0;
+    for (int i = 0; i < nbr; i=i+1) 
+    {
+        total += tab[i];
+    }
+    return total;
+}
+
+float moyenne(float tab[], int nbr) 
+{
+    return somme(tab, nbr) / nbr;
+}
+
+float ecart_type(float tab[], int nbr) 
+{
+    float moy = moyenne(tab, nbr);
+    float variance = 0;
+
+    for (int i = 0; i < nbr; i=i+1) 
+    {
+        variance += (tab[i] - moy)*(tab[i]-moy);
+    }
+    variance /= nbr;
+    return sqrt(variance);
+}
+
+int main() 
+{
+    float tab[100];
+    int nbr = 0;
+    saisir_continue(tab, &nbr);
+    if (nbr > 0) 
+    {
+        printf("Somme : %.2f\n", somme(tab, nbr));
+        printf("Moyenne : %.2f\n", moyenne(tab, nbr));
+        printf("Écart type : %.2f\n", ecart_type(tab, nbr));
+    } 
+    else 
+    {
+        printf("Aucune donnée valide saisie.\n");
+    }
+
+    return 0;
+}
