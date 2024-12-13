@@ -61,7 +61,7 @@ void saisir_continue(float tab[], int *nbr)
                 }
             }
             sscanf(saisie, "%f", &tab[*nbr]);
-            (*nbr)++;
+            (*nbr)=(*nbr)+1;
         } 
         else 
         {
