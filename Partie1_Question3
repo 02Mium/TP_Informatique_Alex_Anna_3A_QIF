@@ -21,7 +21,7 @@ int est_nombre(const char *chaine)
             {
                 continue;
             } 
-else if (chaine[i] == '.' || chaine[i] == ',') 
+            else if (chaine[i] == '.' || chaine[i] == ',') 
             {
                 if (pov == 0) 
                 {
