@@ -44,15 +44,12 @@ void saisir_continue(float tab[], int *nbr)
 {
     char saisie[100];
     *nbr = 0;
-    while (1) 
+    while (strcmp(saisie, "stop") != 0) 
     {
         printf("Entrez une valeur ou tapez 'stop' pour terminer : ");
         scanf("%s", saisie);
 
-        if (strcmp(saisie, "stop") == 0) 
-        {
-            break;
-        }
+       
 
         if (est_nombre(saisie)) 
         {
@@ -64,7 +61,7 @@ void saisir_continue(float tab[], int *nbr)
                 }
             }
             sscanf(saisie, "%f", &tab[*nbr]);
-            (*nbr)=(*nbr)+1;
+            (*nbr)++;
         } 
         else 
         {
