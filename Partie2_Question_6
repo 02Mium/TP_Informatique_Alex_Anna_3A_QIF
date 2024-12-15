@@ -81,7 +81,7 @@ void triage(float tab[], int nbr)
     }
 }
 
-float mediane(float tab[], int nbr) {
+float calculer_mediane(float tab[], int nbr) {
     triage(tab, nbr);
     if (nbr % 2 == 0) {
         return (tab[nbr / 2 - 1] + tab[nbr / 2]) / 2.0;
@@ -94,12 +94,12 @@ float mediane(float tab[], int nbr) {
 void calculer_frequences(float tab[], int nbr) 
 {
     triage(tab, nbr); 
-
     printf("\nValeur\tFréquence\n");
     int i = 0;
-    int freq = 0;
-    float valeur = tab[i];
-    while (i < nbr) {
+    while (i < nbr) 
+        {
+        float valeur = tab[i];
+        int freq = 0;
         while (i < nbr && tab[i] == valeur) 
         {
             freq=freq+1;
